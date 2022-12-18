@@ -105,6 +105,16 @@ jobs:
         machine: [arm, arm64, x64, x86]
     steps:
       - uses: actions/checkout@v2
+
+      - uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+          ndk-version: r21e
+          add-to-path: false
+      - run: ./build.sh
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+          
       - name: Set up Python 2.7
         uses: actions/setup-python@v2
         with:
