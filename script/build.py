@@ -12,8 +12,12 @@ def main():
 
   if build_type == 'Debug':
     args = ['is_debug=true']
+    if 'windows' == system:
+      args += [ "extra_cflags=""-MTd""" ]
   else:
     args = ['is_official_build=true']
+    if 'windows' == system:
+      args += [ "extra_cflags=""-MT""" ]
 
   args += [
     'target_cpu="' + machine + '"',
