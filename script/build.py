@@ -64,14 +64,14 @@ def main():
                 'skia_use_system_freetype2=false',
                 # 'skia_use_angle=true',
                 'skia_use_direct3d=true',
-                'extra_cflags=["-DSK_FONT_HOST_USE_SYSTEM_SETTINGS", "MT"]',
+                'extra_cflags=["-DSK_FONT_HOST_USE_SYSTEM_SETTINGS", "-MT"]',
             ]
         else:
             args += [
                 'skia_use_system_freetype2=false',
                 # 'skia_use_angle=true',
                 'skia_use_direct3d=true',
-                'extra_cflags=["-DSK_FONT_HOST_USE_SYSTEM_SETTINGS", "MTd"]',
+                'extra_cflags=["-DSK_FONT_HOST_USE_SYSTEM_SETTINGS", "-MTd"]',
             ]
     elif 'android' == system:
         args += [
