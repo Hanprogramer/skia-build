@@ -71,32 +71,32 @@ jobs:
 #         env:
 #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  linux-gcc4:
-    runs-on: ubuntu-latest
-    container: ubuntu:22.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 2.7
-        uses: actions/setup-python@v2
-        with:
-          python-version: 2.7
-      - run: sudo ./script/prepare_linux.sh
-      - run: sudo apt-get install binutils-2.26 -y
-      - run: python3 script/check_release.py --version ${{ env.version }} --classifier gcc4
-        if: ${{ github.event.inputs.skip_release != 'true' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/checkout.py --version ${{ env.version }}
-      - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/build.py
-      - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/archive.py --version ${{ env.version }} --classifier gcc4
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Skia-${{ env.version }}-linux-Release-x64-gcc4.zip
-          path: '*.zip'
-      - run: python3 script/release.py --version ${{ env.version }} --classifier gcc4
-        if: ${{ github.event.inputs.skip_release != 'true' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # linux-gcc4:
+  #   runs-on: ubuntu-latest
+  #   container: ubuntu:22.04
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Set up Python 2.7
+  #       uses: actions/setup-python@v2
+  #       with:
+  #         python-version: 2.7
+  #     - run: sudo ./script/prepare_linux.sh
+  #     - run: sudo apt-get install binutils-2.26 -y
+  #     - run: python3 script/check_release.py --version ${{ env.version }} --classifier gcc4
+  #       if: ${{ github.event.inputs.skip_release != 'true' }}
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/checkout.py --version ${{ env.version }}
+  #     - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/build.py
+  #     - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/archive.py --version ${{ env.version }} --classifier gcc4
+  #     - uses: actions/upload-artifact@v2
+  #       with:
+  #         name: Skia-${{ env.version }}-linux-Release-x64-gcc4.zip
+  #         path: '*.zip'
+  #     - run: python3 script/release.py --version ${{ env.version }} --classifier gcc4
+  #       if: ${{ github.event.inputs.skip_release != 'true' }}
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   android:
     runs-on: ubuntu-22.04
